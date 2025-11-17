@@ -8,6 +8,6 @@ class Solution:
             if curr_sum == target:
                 return [left + 1, right + 1]  #1-based index, not zero based. This gives two numbers that sum to result
             elif curr_sum < target:
-                left += 1     #move left
+                left += 1     #need a smaller sum ->move left
             else:
-                right -= 1  #move right
+                right -= 1  #need a smaller sum -> move right
