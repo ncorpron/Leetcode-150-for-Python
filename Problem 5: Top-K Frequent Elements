@@ -1,0 +1,14 @@
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        freq = {} #step 1: build frequency map
+        for n in nums:
+            freq[n] = freq.get(n,0) + 1
+
+        min_heap = []  #step 2: use a min heap of size k. Heap stores (frequency, number)
+
+        for num, count in freq.items():
+            heapq.heappush(min_heap, (count, num))
+            if len(min_heap) > k:
+                heapq.heappop(min_heap)    #if heap exceeds size k, remove smallest frequency
+
+        return [num for count, num in min_heap]   #extract top-k frequent elements
