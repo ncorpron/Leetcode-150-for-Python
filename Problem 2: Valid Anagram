@@ -1,0 +1,13 @@
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        if len(s) != len(t):  #if s and t have different lengths, immediately return False
+            return False
+
+        count = [0] * 26  #array for 26 lowercase letters. Tracks the difference in character frequencies
+
+        for i in range(len(s)):  #loops over both strings at once increment for s, decrement for t
+            count[ord(s[i]) - ord('a')] += 1
+            count[ord(t[i]) - ord('a')] -= 1
+
+        # if all counts are zero, it's an anagram
+        return all (x == 0 for x in count)
