@@ -136,9 +136,3 @@ class Solution:
 ```
 
 ---
-
-## 📚 More sections will be added (Dynamic Programming, Trees, Graphs, etc.)
-
-This file is meant to grow as you complete NeetCode 150.
-
-Let me know which section you want added next!
