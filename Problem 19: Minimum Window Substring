@@ -1,0 +1,45 @@
+from collections import Counter
+
+class Solution:
+    def minWindow(self, s: str, t: str) -> str:
+        if not s or not t:
+            return ""
+        
+        t_count = Counter(t)
+        required = len(t_count)
+        
+        # Filter s to only characters that are in t
+        filtered_s = [(i, char) for i, char in enumerate(s) if char in t_count]
+        
+        l, r = 0, 0
+        formed = 0
+        window_counts = {}
+        min_len = float("inf")
+        min_window = (0, 0)
+        
+        while r < len(filtered_s):
+            char_index, char = filtered_s[r]
+            window_counts[char] = window_counts.get(char, 0) + 1
+            
+            if window_counts[char] == t_count[char]:
+                formed += 1
+            
+            # Try to contract the window
+            while l <= r and formed == required:
+                start_index, start_char = filtered_s[l]
+                end_index, _ = filtered_s[r]
+                
+                if end_index - start_index + 1 < min_len:
+                    min_len = end_index - start_index + 1
+                    min_window = (start_index, end_index)
+                
+                window_counts[start_char] -= 1
+                if window_counts[start_char] < t_count[start_char]:
+                    formed -= 1
+                
+                l += 1
+            
+            r += 1
+        
+        l, r = min_window
+        return s[l:r+1] if min_len != float("inf") else ""
