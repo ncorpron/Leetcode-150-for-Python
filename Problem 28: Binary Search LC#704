@@ -1,0 +1,17 @@
+class Solution:
+    def search(self, nums: list[int], target: int) -> int:
+        left = 0  # # Left pointer
+        right = len(nums) - 1  # # Right pointer
+
+        # # While the search space is valid
+        while left <= right:
+            mid = left + (right - left) // 2  # # Middle index
+            
+            if nums[mid] == target:  # # Target found
+                return mid
+            elif nums[mid] < target:  # # Target is on the right
+                left = mid + 1
+            else:  # # Target is on the left
+                right = mid - 1
+
+        return -1  # # Target not found
